@@ -34,9 +34,9 @@ namespace Leave_Management
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LeaveManagementConnection")));
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<DataContext>();
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<Employee>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>();
             services.AddControllersWithViews();
@@ -57,7 +57,7 @@ namespace Leave_Management
         public void Configure(
             IApplicationBuilder app, 
             IWebHostEnvironment env,
-            UserManager<IdentityUser> userManager,
+            UserManager<Employee> userManager,
             RoleManager<IdentityRole> roleManager
             )
         {

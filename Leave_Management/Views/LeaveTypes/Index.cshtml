@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th style="text-align:right">
-                @Html.DisplayNameFor(model => model.DateCreated)
+                @Html.DisplayNameFor(model => model.DefaultDays)
             </th>
             <th style="text-align:right">
                 Actions
@@ -32,7 +32,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td style="text-align:right">
-                    @Html.DisplayFor(modelItem => item.DateCreated)
+                    @Html.DisplayFor(modelItem => item.DefaultDays)
                 </td>
                 <td style="text-align:right">
                     <a asp-action="Edit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true"></i></a> 
