@@ -1,5 +1,4 @@
-﻿using Leave_Management.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,24 +6,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Leave_Management.Models
+namespace Leave_Management.Data
 {
-    public class LeaveHistoryVM
+    public class LeaveRequest
     {
+        [Key]
         public int Id { get; set; }
-        public EmployeeVM RequestingEmployee { get; set; }
+
+        [ForeignKey("RequestingEmployeeId")]
+        public Employee RequestingEmployee { get; set; }
         public string RequestingEmployeeId { get; set; }
-        [Required]
         public DateTime StartDate { get; set; }
-        [Required]
         public DateTime EndDate { get; set; }
-        public LeaveTypeVM LeaveType { get; set; }
+        [ForeignKey("LeaveTypeId")]
+        public LeaveType LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
-        public IEnumerable<SelectListItem> LeaveTypes { get; set; }
         public DateTime DateRequested { get; set; }
         public DateTime DateActioned { get; set; }
         public bool? Approved { get; set; }
-        public EmployeeVM ApprovedBy { get; set; }
+        [ForeignKey("ApprovedById")]
+        public Employee ApprovedBy { get; set; }
         public string ApprovedById { get; set; }
+        public bool Cancelled { get; set; }
+        public string RequestComments { get; set; }
     }
 }

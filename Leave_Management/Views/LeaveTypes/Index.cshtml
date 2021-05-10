@@ -13,10 +13,10 @@
 <table id="tblData" class="table">
     <thead>
         <tr>
-            <th>
+            <th style="border-right-style:solid; border-right-width:thin; border-right-color:cadetblue">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th style="text-align:right">
+            <th style="text-align:right; border-right-style:solid; border-right-width:thin; border-right-color:cadetblue">
                 @Html.DisplayNameFor(model => model.DefaultDays)
             </th>
             <th style="text-align:right">
@@ -28,10 +28,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td style="border-right-style:solid; border-right-width:thin; border-right-color:cadetblue">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td style="text-align:right">
+                <td style="text-align:right; border-right-style:solid; border-right-width:thin; border-right-color:cadetblue">
                     @Html.DisplayFor(modelItem => item.DefaultDays)
                 </td>
                 <td style="text-align:right">
