@@ -221,6 +221,7 @@ namespace Leave_Management.Controllers
         {
             var leaveRequest = _leaveRequestRepo.FindById(id);
             leaveRequest.Cancelled = true;
+            leaveRequest.Approved = false;
             //_leaveRequestRepo.Delete(leaveRequest);
             //var employeeid = leaveRequest.RequestingEmployeeId;
             //var leaveTypeId = leaveRequest.LeaveTypeId;
@@ -240,6 +241,8 @@ namespace Leave_Management.Controllers
         {
             var leaveRequest = _leaveRequestRepo.FindById(id);
             leaveRequest.Cancelled = true;
+            leaveRequest.Approved = false;
+
             //_leaveRequestRepo.Delete(leaveRequest);
             var employeeid = leaveRequest.RequestingEmployeeId;
             var leaveTypeId = leaveRequest.LeaveTypeId;
