@@ -24,6 +24,8 @@ namespace Leave_Management.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -31,24 +33,44 @@ namespace Leave_Management.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
+        //public class InputModel
+        //{
+        //    [Phone]
+        //    [Display(Name = "Phone number")]
+        //    public string PhoneNumber { get; set; }
+        //}
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+            [Display(Name = "Username")]
+            public string UserName { get; set; }
+            //[Phone]
+            //[Display(Name = "Phone number")]
+            //public string PhoneNumber { get; set; }
+            [Display(Name = "Profile Picture")]
+            public byte[] ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(Employee user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var firstName = user.Firstname;
+            var lastName = user.Lastname;
+            //var profilePicture = user.ProfilePicture;
             Username = userName;
-
-            Input = new InputModel
-            {
-                PhoneNumber = phoneNumber
-            };
+            Firstname = firstName;
+            Lastname = lastName;
+            //Input = new InputModel
+            //{
+            //    Username = userName,
+            //    FirstName = firstName,
+            //    LastName = lastName
+            //    //ProfilePicture = profilePicture
+            //};
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -76,17 +98,35 @@ namespace Leave_Management.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var firstName = user.Firstname;
+            var lastName = user.Lastname;
+            var userName = user.UserName;
+            if (Input.FirstName != firstName)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+                user.Firstname = Input.FirstName;
+                await _userManager.UpdateAsync(user);
             }
+            if (Input.LastName != lastName)
+            {
+                user.Lastname = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.UserName != userName)
+            {
+                user.UserName = Input.UserName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

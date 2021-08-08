@@ -43,6 +43,8 @@ namespace Leave_Management.Models
         public int ApprovedRequests { get; set; }
         [DisplayName("Pending Requests")]
         public int PendingRequests { get; set; }
+        [DisplayName("Cancelled Requests")]
+        public int CancelledRequests { get; set; }
         [DisplayName("Rejected Requests")]
         public int RejectedRequests { get; set; }
         public List<LeaveRequestVM> LeaveRequests { get; set; }
