@@ -135,6 +135,55 @@ namespace Leave_Management.Controllers
             }
         }
 
+
+        // GET: LeaveTypesController/Edit1/5
+        public async Task<ActionResult> Edit1(int id)
+        {
+            //var isExists = await _repo.isExists(id);
+            var isExists = await _unitOfWork.LeaveTypes.isExists(q => q.Id == id);
+            if (!isExists)
+            {
+                return NotFound();
+            }
+            //var leavetype = await _repo.FindById(id);
+            var leavetype = await _unitOfWork.LeaveTypes.Find(q => q.Id == id);
+            var model = _mapper.Map<LeaveTypeVM>(leavetype);
+            return View(model);
+        }
+
+        // POST: LeaveTypesController/Edit1/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit1(LeaveTypeVM model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var leaveType = _mapper.Map<LeaveType>(model);
+                //var isSuccess = await _repo.Update(leaveType);
+                //if (!isSuccess)
+                //{
+                //    ModelState.AddModelError("", "Something went wrong");
+                //    return View(model);
+                //}
+                _unitOfWork.LeaveTypes.Update(leaveType);
+                await _unitOfWork.Save();
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Something went wrong");
+                return View(model);
+            }
+        }
+
+
+
+
         // GET: LeaveTypesController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {

@@ -26,7 +26,7 @@ namespace Leave_Management.Repository
         public async Task<bool> Delete(LeaveType entity)
         {
             _context.LeaveTypes.Remove(entity);
-            return await Save ();
+            return await Save();
         }
 
         public async Task<ICollection<LeaveType>> FindAll()

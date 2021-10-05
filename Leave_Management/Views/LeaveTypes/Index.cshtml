@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.DefaultDays)
             </td>
             <td style="text-align:right">
-                <a asp-action="Edit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit" asp-route-id="@item.Id"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                <a asp-action="Edit1" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit" asp-route-id="@item.Id"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                 <a asp-action="Details" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle" aria-hidden="true"></i></a>
                 <a asp-action="Delete" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delelete this record?')"><i class="fa fa-trash-alt" aria-hidden="true"></i></a>
             </td>
